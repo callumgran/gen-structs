@@ -18,7 +18,6 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#include "common.h"
 #include "s_linkedlist.h"
 
 bool s_linkedlist_init(struct s_linkedlist_t *s_linkedlist)
@@ -66,7 +65,7 @@ size_t s_linkedlist_size(const struct s_linkedlist_t *s_linkedlist)
 	return s_linkedlist->size;
 }
 
-bool s_linkedlist_push_front(struct s_linkedlist_t *s_linkedlist, const void *item)
+bool s_linkedlist_push_front(struct s_linkedlist_t *s_linkedlist, void *item)
 {
 	if (s_linkedlist == NULL)
 		return false;
@@ -89,7 +88,7 @@ bool s_linkedlist_push_front(struct s_linkedlist_t *s_linkedlist, const void *it
 	return true;
 }
 
-bool s_linkedlist_push_back(struct s_linkedlist_t *s_linkedlist, const void *item)
+bool s_linkedlist_push_back(struct s_linkedlist_t *s_linkedlist, void *item)
 {
 	if (s_linkedlist == NULL)
 		return false;
@@ -205,101 +204,102 @@ bool s_linkedlist_remove(struct s_linkedlist_t *s_linkedlist, const void *item, 
 
 void *s_linkedlist_front(const struct s_linkedlist_t *s_linkedlist)
 {
-        if (s_linkedlist == NULL)
-                return NULL;
+	if (s_linkedlist == NULL)
+		return NULL;
 
-        if (s_linkedlist->head == NULL)
-                return NULL;
+	if (s_linkedlist->head == NULL)
+		return NULL;
 
-        return s_linkedlist->head->item;
+	return s_linkedlist->head->item;
 }
 
 void *s_linkedlist_back(const struct s_linkedlist_t *s_linkedlist)
 {
-        if (s_linkedlist == NULL)
-                return NULL;
+	if (s_linkedlist == NULL)
+		return NULL;
 
-        if (s_linkedlist->tail == NULL)
-                return NULL;
+	if (s_linkedlist->tail == NULL)
+		return NULL;
 
-        return s_linkedlist->tail->item;
+	return s_linkedlist->tail->item;
 }
 
 bool s_linkedlist_clear(struct s_linkedlist_t *s_linkedlist)
 {
-        if (s_linkedlist == NULL)
-                return false;
-        
-        s_linkedlist_free(s_linkedlist);
+	if (s_linkedlist == NULL)
+		return false;
 
-        s_linkedlist->head = NULL;
-        s_linkedlist->tail = NULL;
-        s_linkedlist->size = 0;
+	s_linkedlist_free(s_linkedlist);
 
-        return true;
+	s_linkedlist->head = NULL;
+	s_linkedlist->tail = NULL;
+	s_linkedlist->size = 0;
+
+	return true;
 }
 
-bool s_linkedlist_contains(const struct s_linkedlist_t *s_linkedlist, const void *item, compare_fn_t cmp)
+bool s_linkedlist_contains(const struct s_linkedlist_t *s_linkedlist, const void *item,
+						   compare_fn_t cmp)
 {
-        if (s_linkedlist == NULL || item == NULL)
-                return false;
+	if (s_linkedlist == NULL || item == NULL)
+		return false;
 
-        if (s_linkedlist->head == NULL)
-                return false;
+	if (s_linkedlist->head == NULL)
+		return false;
 
-        struct s_linkedlist_node_t *node = s_linkedlist->head;
+	struct s_linkedlist_node_t *node = s_linkedlist->head;
 
-        while (node != NULL) {
-                if (cmp(node->item, item) == 0)
-                        return true;
+	while (node != NULL) {
+		if (cmp(node->item, item) == 0)
+			return true;
 
-                node = node->next;
-        }
+		node = node->next;
+	}
 
-        return false;
+	return false;
 }
 
 void *s_linkedlist_get(const struct s_linkedlist_t *s_linkedlist, size_t index)
 {
-        if (s_linkedlist == NULL)
-                return NULL;
+	if (s_linkedlist == NULL)
+		return NULL;
 
-        if (s_linkedlist->head == NULL)
-                return NULL;
+	if (s_linkedlist->head == NULL)
+		return NULL;
 
-        struct s_linkedlist_node_t *node = s_linkedlist->head;
+	struct s_linkedlist_node_t *node = s_linkedlist->head;
 
-        while (index-- > 0) {
-                if (node == NULL)
-                        return NULL;
+	while (index-- > 0) {
+		if (node == NULL)
+			return NULL;
 
-                node = node->next;
-        }
+		node = node->next;
+	}
 
-        return node->item;
+	return node->item;
 }
 
 bool s_linkedlist_reverse(struct s_linkedlist_t *s_linkedlist)
 {
-        if (s_linkedlist == NULL)
-                return false;
+	if (s_linkedlist == NULL)
+		return false;
 
-        if (s_linkedlist->head == NULL)
-                return false;
+	if (s_linkedlist->head == NULL)
+		return false;
 
-        struct s_linkedlist_node_t *prev = NULL;
-        struct s_linkedlist_node_t *node = s_linkedlist->head;
-        struct s_linkedlist_node_t *next = NULL;
+	struct s_linkedlist_node_t *prev = NULL;
+	struct s_linkedlist_node_t *node = s_linkedlist->head;
+	struct s_linkedlist_node_t *next = NULL;
 
-        while (node != NULL) {
-                next = node->next;
-                node->next = prev;
-                prev = node;
-                node = next;
-        }
+	while (node != NULL) {
+		next = node->next;
+		node->next = prev;
+		prev = node;
+		node = next;
+	}
 
-        s_linkedlist->tail = s_linkedlist->head;
-        s_linkedlist->head = prev;
+	s_linkedlist->tail = s_linkedlist->head;
+	s_linkedlist->head = prev;
 
-        return true;
+	return true;
 }
