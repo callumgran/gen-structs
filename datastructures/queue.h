@@ -18,15 +18,15 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
-#include <sys/types.h>
 #include <stdbool.h>
+#include <sys/types.h>
 
 struct queue_t {
-    void **items;
-    size_t start;
-    size_t end;
-    size_t size; 
-    size_t max;
+	void **items;
+	size_t start;
+	size_t end;
+	size_t size;
+	size_t max;
 };
 
 void queue_init(struct queue_t *queue, size_t size);

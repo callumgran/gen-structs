@@ -34,7 +34,7 @@ void queue_free(struct queue_t *queue)
 {
 	if (queue == NULL)
 		return;
-	
+
 	free(queue->items);
 }
 
@@ -58,10 +58,10 @@ bool queue_push(struct queue_t *queue, void *item)
 {
 	if (queue == NULL || item == NULL)
 		return false;
-	
+
 	if (queue_full(queue))
 		return false;
-	
+
 	queue->items[queue->end] = item;
 	queue->end = (queue->end + 1) % queue->max;
 	++queue->size;
