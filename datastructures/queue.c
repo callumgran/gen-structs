@@ -61,7 +61,7 @@ bool queue_full(const struct queue_t *queue)
 	return queue->size == queue->max;
 }
 
-bool queue_push(struct queue_t *queue, const void *item)
+bool queue_push(struct queue_t *queue, void *item)
 {
 	if (queue == NULL || item == NULL)
 		return false;

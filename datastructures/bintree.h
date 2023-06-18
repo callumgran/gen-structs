@@ -42,10 +42,10 @@ bool tree_free(struct tree_t *tree);
 void tree_node_free(struct tree_node_t *node);
 
 bool tree_node_insert(struct tree_t *tree, struct tree_node_t *node);
-bool tree_node_remove(struct tree_t *tree, void *data);
+bool tree_node_remove(struct tree_t *tree, const void *data);
 
-struct tree_node_t *tree_search(struct tree_t *tree, void *data);
-size_t tree_find_height(struct tree_t *tree);
-size_t tree_node_find_height(struct tree_node_t *node);
+struct tree_node_t *tree_search(struct tree_t *tree, const void *data);
+size_t tree_find_height(const struct tree_t *tree);
+size_t tree_node_find_height(const struct tree_node_t *node);
 
 #endif

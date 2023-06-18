@@ -31,7 +31,7 @@ bool tree_init(struct tree_t *tree, compare_fn_t cmp)
 	return true;
 }
 
-bool tree_node_init(struct tree_node_t *node, const void *data, free_fn_t *free_func)
+bool tree_node_init(struct tree_node_t *node, void *data, free_fn_t *free_func)
 {
 	if (node == NULL)
 		return false;

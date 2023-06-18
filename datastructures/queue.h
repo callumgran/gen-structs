@@ -29,11 +29,11 @@ struct queue_t {
 	size_t max;
 };
 
-void queue_init(struct queue_t *queue, size_t size);
-void queue_free(struct queue_t *queue);
+bool queue_init(struct queue_t *queue, const size_t size);
+bool queue_free(struct queue_t *queue);
 
-bool queue_empty(struct queue_t *queue);
-bool queue_full(struct queue_t *queue);
+bool queue_empty(const struct queue_t *queue);
+bool queue_full(const struct queue_t *queue);
 
 bool queue_push(struct queue_t *queue, void *item);
 void *queue_pop(struct queue_t *queue);

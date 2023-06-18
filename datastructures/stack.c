@@ -20,7 +20,7 @@
 
 #include "stack.h"
 
-bool stack_init(struct stack_t *stack, const size_t capacity)
+bool stack_init(struct stack_t *stack, const size_t cap)
 {
 	if (stack == NULL)
 		return false;
@@ -61,7 +61,7 @@ bool stack_full(const struct stack_t *stack)
 	return stack->size == stack->capacity;
 }
 
-bool stack_push(struct stack_t *stack, const void *item)
+bool stack_push(struct stack_t *stack, void *item)
 {
 	if (stack == NULL || item == NULL)
 		return false;

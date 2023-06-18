@@ -66,7 +66,7 @@ size_t s_linkedlist_size(const struct s_linkedlist_t *s_linkedlist)
 	return s_linkedlist->size;
 }
 
-bool s_linkedlist_push_front(struct s_linkedlist_t *s_linkedlist, const void *item)
+bool s_linkedlist_push_front(struct s_linkedlist_t *s_linkedlist, void *item)
 {
 	if (s_linkedlist == NULL)
 		return false;
@@ -89,7 +89,7 @@ bool s_linkedlist_push_front(struct s_linkedlist_t *s_linkedlist, const void *it
 	return true;
 }
 
-bool s_linkedlist_push_back(struct s_linkedlist_t *s_linkedlist, const void *item)
+bool s_linkedlist_push_back(struct s_linkedlist_t *s_linkedlist, void *item)
 {
 	if (s_linkedlist == NULL)
 		return false;

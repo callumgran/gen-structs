@@ -27,11 +27,11 @@ struct stack_t {
 	void **items;
 };
 
-bool stack_init(struct stack_t *stack, size_t capacity);
+bool stack_init(struct stack_t *stack, const size_t cap);
 bool stack_free(struct stack_t *stack);
 
-bool stack_empty(struct stack_t *stack);
-bool stack_full(struct stack_t *stack);
+bool stack_empty(const struct stack_t *stack);
+bool stack_full(const struct stack_t *stack);
 
 bool stack_push(struct stack_t *stack, void *item);
 void *stack_pop(struct stack_t *stack);
