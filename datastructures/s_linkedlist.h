@@ -21,6 +21,8 @@
 #include <stdbool.h>
 #include <sys/types.h>
 
+#include "common.h"
+
 struct s_linkedlist_node_t {
 	void *item;
 	struct s_linkedlist_node_t *next;
@@ -49,7 +51,8 @@ void *s_linkedlist_front(const struct s_linkedlist_t *list);
 void *s_linkedlist_back(const struct s_linkedlist_t *list);
 
 bool s_linkedlist_clear(struct s_linkedlist_t *list);
-bool s_linkedlist_contains(const struct s_linkedlist_t *s_linkedlist, const void *item, compare_fn_t cmp);
+bool s_linkedlist_contains(const struct s_linkedlist_t *s_linkedlist, const void *item,
+						   compare_fn_t cmp);
 void *s_linkedlist_get(const struct s_linkedlist_t *list, const size_t index);
 
 bool s_linkedlist_reverse(struct s_linkedlist_t *list);
