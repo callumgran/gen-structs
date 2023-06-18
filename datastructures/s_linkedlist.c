@@ -14,27 +14,3 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-
-#ifndef STACK_H
-#define STACK_H
-
-#include <stdbool.h>
-#include <sys/types.h>
-
-struct stack_t {
-	size_t size;
-	size_t capacity;
-	void **items;
-};
-
-bool stack_init(struct stack_t *stack, size_t capacity);
-bool stack_free(struct stack_t *stack);
-
-bool stack_empty(struct stack_t *stack);
-bool stack_full(struct stack_t *stack);
-
-bool stack_push(struct stack_t *stack, void *item);
-void *stack_pop(struct stack_t *stack);
-void *stack_get(struct stack_t *stack);
-
-#endif /* STACK_H */

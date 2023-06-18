@@ -38,7 +38,7 @@ struct tree_t {
 
 bool tree_init(struct tree_t *tree, compare_fn_t cmp);
 bool tree_node_init(struct tree_node_t *node, void *data, free_fn_t *free_func);
-void tree_free(struct tree_t *tree);
+bool tree_free(struct tree_t *tree);
 void tree_node_free(struct tree_node_t *node);
 
 bool tree_node_insert(struct tree_t *tree, struct tree_node_t *node);

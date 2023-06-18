@@ -20,22 +20,29 @@
 
 #include "queue.h"
 
-void queue_init(struct queue_t *queue, const size_t size)
+bool queue_init(struct queue_t *queue, const size_t size)
 {
 	if (queue == NULL)
-		return;
+		return false;
+
+	if (size == 0)
+		return false;
 
 	queue->items = (void *)(malloc(size * sizeof(void *)));
 	queue->max = size;
 	queue->start = queue->end = queue->size = 0;
+
+	return true;
 }
 
-void queue_free(struct queue_t *queue)
+bool queue_free(struct queue_t *queue)
 {
 	if (queue == NULL)
-		return;
+		return false;
 
 	free(queue->items);
+
+	return true;
 }
 
 bool queue_empty(const struct queue_t *queue)

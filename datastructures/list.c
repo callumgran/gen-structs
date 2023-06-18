@@ -22,80 +22,83 @@
 
 bool list_init(struct list_t *list, const size_t item_size)
 {
-    if (list == NULL)
-        return false;
-    if (item_size == 0)
-        return false;
-    
+	if (list == NULL)
+		return false;
+	if (item_size == 0)
+		return false;
+
 	list->size = 0;
 	list->capacity = LIST_STARTING_CAPACITY;
 	list->items = (void **)(malloc(LIST_STARTING_CAPACITY * sizeof(void *)));
 	list->item_size = item_size;
 
-    return true;
+	return true;
 }
 
-void list_free(struct list_t *list)
+bool list_free(struct list_t *list)
 {
+	if (list == NULL)
+		return false;
+
 	free(list->items);
 }
 
 bool list_empty(const struct list_t *list)
 {
-    if (list == NULL)
-        return false;
+	if (list == NULL)
+		return false;
 
 	return !list->size;
 }
 
 size_t list_size(const struct list_t *list)
 {
-    if (list == NULL)
-        return 0;
+	if (list == NULL)
+		return 0;
 
-    return list->size;
+	return list->size;
 }
 
 size_t list_index_of(struct list_t *list, const void *item, equality_fn_t *eq)
 {
-    if (list == NULL || item == NULL)
-        return ITEM_NOT_FOUND;
+	if (list == NULL || item == NULL)
+		return ITEM_NOT_FOUND;
 
-    for (long i = 0; i < list->size; i++) {
-        if (eq(*(list->items + i), item))
-            return i;
-    }
+	for (long i = 0; i < list->size; i++) {
+		if (eq(*(list->items + i), item))
+			return i;
+	}
 
-    return ITEM_NOT_FOUND;
+	return ITEM_NOT_FOUND;
 }
 
 size_t list_index_of_r(struct list_t *list, const void *item, equality_fn_t *eq)
 {
-    if (list == NULL || item == NULL)
-        return ITEM_NOT_FOUND;
+	if (list == NULL || item == NULL)
+		return ITEM_NOT_FOUND;
 
-    for (ssize_t i = list->size; i >= 0; --i) {
-        if (eq(*(list->items + i), item))
-            return i;
-    }
+	for (ssize_t i = list->size; i >= 0; --i) {
+		if (eq(*(list->items + i), item))
+			return i;
+	}
 
-    return ITEM_NOT_FOUND;
+	return ITEM_NOT_FOUND;
 }
 
-void list_append(struct list_t *list, const void *item)
+bool list_append(struct list_t *list, const void *item)
 {
-    if (list == NULL || item == NULL)
-        return;
+	if (list == NULL || item == NULL)
+		return false;
 
 	ENSURE_CAP(list->size, list->capacity, list->items);
 
 	list->items[list->size++] = item;
 }
 
-inline void *list_get(struct list_t *list, const size_t idx)
+void *list_get(struct list_t *list, const size_t idx)
 {
-    if (list == NULL)
-        return NULL;
+	if (list == NULL)
+		return NULL;
 
 	if (idx >= list->size)
 		return NULL;
@@ -105,9 +108,9 @@ inline void *list_get(struct list_t *list, const size_t idx)
 
 bool list_remove(struct list_t *list, const size_t idx)
 {
-    if (list == NULL)
-        return false;
-    
+	if (list == NULL)
+		return false;
+
 	if (idx >= list->size)
 		return false;
 
@@ -123,8 +126,8 @@ bool list_remove(struct list_t *list, const size_t idx)
 
 bool list_remove_item(struct list_t *list, const void *item, equality_fn_t *eq)
 {
-    if (list == NULL || item == NULL)
-        return false;
+	if (list == NULL || item == NULL)
+		return false;
 
 	size_t ret;
 
@@ -136,25 +139,30 @@ bool list_remove_item(struct list_t *list, const void *item, equality_fn_t *eq)
 	return ret;
 }
 
-void list_remove_all(struct list_t *list)
+bool list_remove_all(struct list_t *list)
 {
+	if (list == NULL)
+		return false;
+
 	list->size = 0;
 	list->capacity = LIST_STARTING_CAPACITY;
 	list->items = (void **)(realloc(list->items, list->capacity * sizeof(void *)));
+
+	return true;
 }
 
 bool list_sort(struct list_t *list, compare_fn_t *cmp)
 {
-    if (list == NULL)
-        return false;
+	if (list == NULL)
+		return false;
 
-    if (list->size == 0)
-        return false;
+	if (list->size == 0)
+		return false;
 
-    if (list->size == 1)
-        return true;
+	if (list->size == 1)
+		return true;
 
-    qsort(list->items, list->size, sizeof(void *), cmp);
-    
-    return true;
+	qsort(list->items, list->size, sizeof(void *), cmp);
+
+	return true;
 }
