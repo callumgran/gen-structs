@@ -20,7 +20,7 @@
 
 #include "stack.h"
 
-void stack_init(struct stack_t *stack, size_t capacity)
+void stack_init(struct stack_t *stack, const size_t capacity)
 {
 	stack->size = 0;
 	stack->capacity = capacity;
@@ -32,17 +32,23 @@ void stack_free(struct stack_t *stack)
 	free(stack->items);
 }
 
-inline bool stack_empty(struct stack_t *stack)
+inline bool stack_empty(const struct stack_t *stack)
 {
+	if (stack == NULL)
+		return false;
+
 	return !stack->size;
 }
 
-inline bool stack_full(struct stack_t *stack)
+inline bool stack_full(const struct stack_t *stack)
 {
+	if (stack == NULL)
+		return false;
+
 	return stack->size == stack->capacity;
 }
 
-inline bool stack_push(struct stack_t *stack, void *item)
+inline bool stack_push(struct stack_t *stack, const void *item)
 {
 	if (stack == NULL || item == NULL)
 		return false;

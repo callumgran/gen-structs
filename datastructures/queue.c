@@ -20,7 +20,7 @@
 
 #include "queue.h"
 
-void queue_init(struct queue_t *queue, size_t size)
+void queue_init(struct queue_t *queue, const size_t size)
 {
 	if (queue == NULL)
 		return;
@@ -38,7 +38,7 @@ void queue_free(struct queue_t *queue)
 	free(queue->items);
 }
 
-bool queue_empty(struct queue_t *queue)
+bool queue_empty(const struct queue_t *queue)
 {
 	if (queue == NULL)
 		return false;
@@ -46,7 +46,7 @@ bool queue_empty(struct queue_t *queue)
 	return !queue->size;
 }
 
-bool queue_full(struct queue_t *queue)
+bool queue_full(const struct queue_t *queue)
 {
 	if (queue == NULL)
 		return false;
@@ -54,7 +54,7 @@ bool queue_full(struct queue_t *queue)
 	return queue->size == queue->max;
 }
 
-bool queue_push(struct queue_t *queue, void *item)
+bool queue_push(struct queue_t *queue, const void *item)
 {
 	if (queue == NULL || item == NULL)
 		return false;

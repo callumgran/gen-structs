@@ -31,7 +31,7 @@ bool tree_init(struct tree_t *tree, compare_fn_t cmp)
 	return true;
 }
 
-bool tree_node_init(struct tree_node_t *node, void *data, free_fn_t *free_func)
+bool tree_node_init(struct tree_node_t *node, const void *data, free_fn_t *free_func)
 {
 	if (node == NULL)
 		return false;
@@ -95,7 +95,7 @@ bool tree_node_insert(struct tree_t *tree, struct tree_node_t *node)
 	}
 }
 
-struct tree_node_t *tree_search(struct tree_t *tree, void *data)
+struct tree_node_t *tree_search(struct tree_t *tree, const void *data)
 {
 	if (tree == NULL)
 		return NULL;
@@ -117,7 +117,7 @@ struct tree_node_t *tree_search(struct tree_t *tree, void *data)
 	return NULL;
 }
 
-size_t tree_node_find_height(struct tree_node_t *node)
+size_t tree_node_find_height(const struct tree_node_t *node)
 {
 	if (!node) {
 		return 0;
@@ -131,12 +131,12 @@ size_t tree_node_find_height(struct tree_node_t *node)
 	}
 }
 
-size_t tree_find_height(struct tree_t *tree_t)
+size_t tree_find_height(const struct tree_t *tree_t)
 {
 	return tree_node_find_height(tree_t->root);
 }
 
-bool tree_node_remove(struct tree_t *tree, void *data)
+bool tree_node_remove(struct tree_t *tree, const void *data)
 {
 	if (tree == NULL)
 		return false;
