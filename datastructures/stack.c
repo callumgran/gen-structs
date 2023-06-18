@@ -20,24 +20,32 @@
 
 #include "stack.h"
 
-void stack_init(struct stack_t *stack, const size_t capacity)
+bool stack_init(struct stack_t *stack, const size_t capacity)
 {
 	if (stack == NULL)
-		return;
-	
+		return false;
+
 	if (capacity == 0)
-		return;
+		return false;
+
 	stack->size = 0;
 	stack->capacity = capacity;
 	stack->items = (void **)(malloc(capacity * sizeof(void *)));
+
+	return true;
 }
 
-void stack_free(struct stack_t *stack)
+bool stack_free(struct stack_t *stack)
 {
+	if (stack == NULL)
+		return false;
+
 	free(stack->items);
+
+	return true;
 }
 
-inline bool stack_empty(const struct stack_t *stack)
+bool stack_empty(const struct stack_t *stack)
 {
 	if (stack == NULL)
 		return false;
@@ -45,7 +53,7 @@ inline bool stack_empty(const struct stack_t *stack)
 	return !stack->size;
 }
 
-inline bool stack_full(const struct stack_t *stack)
+bool stack_full(const struct stack_t *stack)
 {
 	if (stack == NULL)
 		return false;
@@ -53,7 +61,7 @@ inline bool stack_full(const struct stack_t *stack)
 	return stack->size == stack->capacity;
 }
 
-inline bool stack_push(struct stack_t *stack, const void *item)
+bool stack_push(struct stack_t *stack, const void *item)
 {
 	if (stack == NULL || item == NULL)
 		return false;
@@ -65,7 +73,7 @@ inline bool stack_push(struct stack_t *stack, const void *item)
 	return true;
 }
 
-inline void *stack_pop(struct stack_t *stack)
+void *stack_pop(struct stack_t *stack)
 {
 	if (stack == NULL)
 		return NULL;
@@ -76,7 +84,7 @@ inline void *stack_pop(struct stack_t *stack)
 	return stack->items[--stack->size];
 }
 
-inline void *stack_get(struct stack_t *stack)
+void *stack_get(struct stack_t *stack)
 {
 	if (stack == NULL)
 		return NULL;

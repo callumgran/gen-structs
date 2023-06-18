@@ -58,9 +58,14 @@ void tree_node_free(struct tree_node_t *node)
 	}
 }
 
-void tree_free(struct tree_t *tree)
+bool tree_free(struct tree_t *tree)
 {
+	if (tree == NULL)
+		return false;
+
 	tree_node_free(tree->root);
+
+	return true;
 }
 
 bool tree_node_insert(struct tree_t *tree, struct tree_node_t *node)

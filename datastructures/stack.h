@@ -27,8 +27,8 @@ struct stack_t {
 	void **items;
 };
 
-void stack_init(struct stack_t *stack, size_t capacity);
-void stack_free(struct stack_t *stack);
+bool stack_init(struct stack_t *stack, size_t capacity);
+bool stack_free(struct stack_t *stack);
 
 bool stack_empty(struct stack_t *stack);
 bool stack_full(struct stack_t *stack);
