@@ -24,4 +24,6 @@ typedef void free_fn_t(void *);
 
 typedef int32_t compare_fn_t(const void *a, const void *b);
 
+typedef bool equality_fn_t(const void *a, const void *b);
+
 #endif

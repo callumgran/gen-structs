@@ -22,6 +22,11 @@
 
 void stack_init(struct stack_t *stack, const size_t capacity)
 {
+	if (stack == NULL)
+		return;
+	
+	if (capacity == 0)
+		return;
 	stack->size = 0;
 	stack->capacity = capacity;
 	stack->items = (void **)(malloc(capacity * sizeof(void *)));

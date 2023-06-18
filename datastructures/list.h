@@ -18,8 +18,9 @@
 #ifndef LIST_H
 #define LIST_H
 
-#include <stdlib.h>
 #include <stdbool.h>
+#include <sys/types.h>
+#include "common.h"
 
 #define LIST_STARTING_CAPACITY 32
 #define ITEM_NOT_FOUND SIZE_MAX
@@ -28,45 +29,30 @@
 	for ((i) = 0, item = *(l)->items; (i) < (l)->size; item = *((l)->items + ++(i)))
 
 #define LIST_FOR_EACH_T(l, i, item, T) \
-	for ((i) = 0, item = (T *)(*(l)->items); (i) < (l)->size; item = (T *)(*((l)->items + ++(i))))     
+	for ((i) = 0, item = (T *)(*(l)->items); (i) < (l)->size; item = (T *)(*((l)->items + ++(i))))
 
 struct list_t {
-    size_t size;
-    size_t capacity;
-    size_t item_size;
-    void **items;
+	size_t size;
+	size_t capacity;
+	size_t item_size;
+	void **items;
 };
 
-void list_init(struct list_t *list, size_t item_size);
+bool list_init(struct list_t *list, const size_t item_size);
 void list_free(struct list_t *list);
 
-void list_append(struct list_t *list, void *item);
+bool list_empty(const struct list_t *list);
+size_t list_size(const struct list_t *list);
 
-void *list_get(struct list_t *list, size_t idx);
-long list_delete_item(struct list_t *list, const void *item);
+size_t list_index_of(struct list_t *list, const void *item, equality_fn_t *eq);
+size_t list_index_of_r(struct list_t *list, const void *item, equality_fn_t *eq);
 
-size_t list_index_of(struct list_t *list, const void *item);
-size_t list_index_of(struct list_t *list, const void *item);
+void list_append(struct list_t *list, const void *item);
+void *list_get(struct list_t *list, const size_t idx);
+bool list_remove(struct list_t *list, const size_t idx);
+bool list_remove_item(struct list_t *list, const void *item, equality_fn_t *eq);
+void list_remove_all(struct list_t *list);
 
-/**
- * Method to delete an item at an index from an array list.
- * @param list the array list to delete the item from.
- * @param idx the index to delete the item from.
- * @return the index of the item, or ITEM_NOT_FOUND if the item does not exist.
- */
-long list_delete_at_index(struct list_t *list, size_t idx);
-
-/**
- * Method to delete all items from an array list.
- * @param list the array list to delete the items from.
- */
-void list_delete_all(struct list_t *list);
-
-/**
- * Method to check if an array list is empty.
- * @param list the array list to check.
- * @return true if the array list is empty, false otherwise.
- */
-bool list_empty(struct list_t *list);
+bool list_sort(struct list_t *list, compare_fn_t *cmp);
 
 #endif
