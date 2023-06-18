@@ -15,26 +15,13 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef STACK_H
-#define STACK_H
+#ifndef COMMON_H
+#define COMMON_H
 
-#include <stdbool.h>
-#include <sys/types.h>
+#include <stdint.h>
 
-struct stack_t {
-	size_t size;
-	size_t capacity;
-	void **items;
-};
+typedef void free_fn_t(void *);
 
-void stack_init(struct stack_t *stack, size_t capacity);
-void stack_free(struct stack_t *stack);
+typedef int32_t compare_fn_t(const void *a, const void *b);
 
-bool stack_empty(struct stack_t *stack);
-bool stack_full(struct stack_t *stack);
-
-bool stack_push(struct stack_t *stack, void *item);
-void *stack_pop(struct stack_t *stack);
-void *stack_get(struct stack_t *stack);
-
-#endif /* STACK_H */
+#endif

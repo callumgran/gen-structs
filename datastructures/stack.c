@@ -1,4 +1,3 @@
-
 /*
  *  Copyright (C) 2022-2023 Callum Gran
  *
@@ -23,56 +22,56 @@
 
 void stack_init(struct stack_t *stack, size_t capacity)
 {
-    stack->size = 0;
-    stack->capacity = capacity;
-    stack->items = (void **)(malloc(capacity * sizeof(void *)));
+	stack->size = 0;
+	stack->capacity = capacity;
+	stack->items = (void **)(malloc(capacity * sizeof(void *)));
 }
 
 void stack_free(struct stack_t *stack)
 {
-    free(stack->items);
+	free(stack->items);
 }
 
 inline bool stack_empty(struct stack_t *stack)
 {
-    return !stack->size;
+	return !stack->size;
 }
 
 inline bool stack_full(struct stack_t *stack)
 {
-    return stack->size == stack->capacity;
+	return stack->size == stack->capacity;
 }
 
 inline bool stack_push(struct stack_t *stack, void *item)
 {
-    if (stack == NULL || item == NULL)
-	return false;
+	if (stack == NULL || item == NULL)
+		return false;
 
-    if (stack_full(stack))
-	return false;
+	if (stack_full(stack))
+		return false;
 
-    stack->items[stack->size++] = item;
-    return true;
+	stack->items[stack->size++] = item;
+	return true;
 }
 
 inline void *stack_pop(struct stack_t *stack)
 {
-    if (stack == NULL)
-	return NULL;
+	if (stack == NULL)
+		return NULL;
 
-    if (stack_empty(stack))
-	return NULL;
+	if (stack_empty(stack))
+		return NULL;
 
-    return stack->items[--stack->size];
+	return stack->items[--stack->size];
 }
 
 inline void *stack_get(struct stack_t *stack)
 {
-    if (stack == NULL)
-	return NULL;
+	if (stack == NULL)
+		return NULL;
 
-    if (stack_empty(stack))
-	return NULL;
+	if (stack_empty(stack))
+		return NULL;
 
-    return stack->items[stack->size - 1];
-} 
+	return stack->items[stack->size - 1];
+}
