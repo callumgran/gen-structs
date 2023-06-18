@@ -21,44 +21,44 @@
 #include "../datastructures/stack.h"
 
 struct tuple_t {
-    int a;
-    double b;
+	int a;
+	double b;
 };
 
 
 void test_push_pop_get(void)
 {
-    /* Stack will hold values of Tuple */
-    struct stack_t stack;
-    stack_init(&stack, 16);
+	/* Stack will hold values of Tuple */
+	struct stack_t stack;
+	stack_init(&stack, 16);
 
-    bool rc = stack_push(&stack, &(struct tuple_t){ .a = 1, .b = 1.1 });
-    assert(rc);
+	bool rc = stack_push(&stack, &(struct tuple_t){ .a = 1, .b = 1.1 });
+	assert(rc);
 
-    rc = stack_push(&stack, &(struct tuple_t){ .a = 2, .b = 2.2 });
-    assert(rc);
+	rc = stack_push(&stack, &(struct tuple_t){ .a = 2, .b = 2.2 });
+	assert(rc);
 
-    struct tuple_t *get = stack_get(&stack);
-    assert(get->a == 2);
-    assert(get->b == 2.2);
+	struct tuple_t *get = stack_get(&stack);
+	assert(get->a == 2);
+	assert(get->b == 2.2);
 
-    struct tuple_t *pop = stack_pop(&stack);
-    assert(pop->a == 2);
-    assert(pop->b == 2.2);
+	struct tuple_t *pop = stack_pop(&stack);
+	assert(pop->a == 2);
+	assert(pop->b == 2.2);
 
-    get = stack_get(&stack);
-    assert(get->a == 1);
-    assert(get->b == 1.1);
+	get = stack_get(&stack);
+	assert(get->a == 1);
+	assert(get->b == 1.1);
 
-    pop = stack_pop(&stack);
-    assert(pop->a == 1);
-    assert(pop->b == 1.1);
+	pop = stack_pop(&stack);
+	assert(pop->a == 1);
+	assert(pop->b == 1.1);
 
-    stack_free(&stack);
+	stack_free(&stack);
 }
 
 int main(void)
 {
-    test_push_pop_get();
-    return 0;
+	test_push_pop_get();
+	return 0;
 }
