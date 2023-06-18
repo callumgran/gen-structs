@@ -21,35 +21,37 @@
 #include <stdbool.h>
 #include <sys/types.h>
 
-struct list_node_t {
+struct s_linkedlist_node_t {
 	void *item;
-	struct list_node_t *next;
+	struct s_linkedlist_node_t *next;
 };
 
 struct s_linkedlist_t {
-	struct list_node_t *head;
-	struct list_node_t *tail;
+	struct s_linkedlist_node_t *head;
+	struct s_linkedlist_node_t *tail;
 	size_t size;
-	size_t item_size;
 };
 
-bool s_linkedlist_init(struct s_linkedlist_t *list, const size_t item_size);
+bool s_linkedlist_init(struct s_linkedlist_t *list);
 void s_linkedlist_free(struct s_linkedlist_t *list);
 
-bool s_linkedlist_empty(struct s_linkedlist_t *list);
-size_t s_linkedlist_size(struct s_linkedlist_t *list);
+bool s_linkedlist_empty(const struct s_linkedlist_t *list);
+size_t s_linkedlist_size(const struct s_linkedlist_t *list);
 
-bool s_linkedlist_push_front(struct s_linkedlist_t *list, void *item);
-bool s_linkedlist_push_back(struct s_linkedlist_t *list, void *item);
-void
+bool s_linkedlist_push_front(struct s_linkedlist_t *list, const void *item);
+bool s_linkedlist_push_back(struct s_linkedlist_t *list, const void *item);
 
-	bool
-	s_linkedlist_pop_front(struct s_linkedlist_t *list);
-bool s_linkedlist_pop_back(struct s_linkedlist_t *list);
+void *s_linkedlist_pop_front(struct s_linkedlist_t *list);
+void *s_linkedlist_pop_back(struct s_linkedlist_t *list);
+bool s_linkedlist_remove(struct s_linkedlist_t *list, const void *item);
 
-void *s_linkedlist_get_front(struct s_linkedlist_t *list);
-void *s_linkedlist_get_back(struct s_linkedlist_t *list);
+void *s_linkedlist_front(const struct s_linkedlist_t *list);
+void *s_linkedlist_back(const struct s_linkedlist_t *list);
 
-void s_linkedlist_remove(struct s_linkedlist_t *list, void *item);
+bool s_linkedlist_clear(struct s_linkedlist_t *list);
+bool s_linkedlist_contains(const struct s_linkedlist_t *list, const void *item);
+void *s_linkedlist_get(const struct s_linkedlist_t *list, const size_t index);
+
+bool s_linkedlist_reverse(struct s_linkedlist_t *list);
 
 #endif
