@@ -25,20 +25,19 @@
 #define LIST_STARTING_CAPACITY 32
 #define ITEM_NOT_FOUND SIZE_MAX
 
-#define LIST_FOR_EACH(l, i, item) \
+#define LIST_foreach(l, i, item) \
 	for ((i) = 0, item = *(l)->items; (i) < (l)->size; item = *((l)->items + ++(i)))
 
-#define LIST_FOR_EACH_T(l, i, item, T) \
+#define LIST_foreach_T(l, i, item, T) \
 	for ((i) = 0, item = (T *)(*(l)->items); (i) < (l)->size; item = (T *)(*((l)->items + ++(i))))
 
 struct list_t {
 	size_t size;
 	size_t capacity;
-	size_t item_size;
 	void **items;
 };
 
-bool list_init(struct list_t *list, const size_t item_size);
+bool list_init(struct list_t *list);
 bool list_free(struct list_t *list);
 
 bool list_empty(const struct list_t *list);
@@ -47,7 +46,7 @@ size_t list_size(const struct list_t *list);
 size_t list_index_of(struct list_t *list, const void *item, equality_fn_t *eq);
 size_t list_index_of_r(struct list_t *list, const void *item, equality_fn_t *eq);
 
-bool list_append(struct list_t *list, const void *item);
+bool list_append(struct list_t *list, void *item);
 void *list_get(struct list_t *list, const size_t idx);
 bool list_remove(struct list_t *list, const size_t idx);
 bool list_remove_item(struct list_t *list, const void *item, equality_fn_t *eq);

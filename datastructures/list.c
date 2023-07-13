@@ -20,17 +20,14 @@
 
 #include "list.h"
 
-bool list_init(struct list_t *list, const size_t item_size)
+bool list_init(struct list_t *list)
 {
 	if (list == NULL)
-		return false;
-	if (item_size == 0)
 		return false;
 
 	list->size = 0;
 	list->capacity = LIST_STARTING_CAPACITY;
 	list->items = (void **)(malloc(LIST_STARTING_CAPACITY * sizeof(void *)));
-	list->item_size = item_size;
 
 	return true;
 }
@@ -41,6 +38,8 @@ bool list_free(struct list_t *list)
 		return false;
 
 	free(list->items);
+
+	return true;
 }
 
 bool list_empty(const struct list_t *list)
@@ -64,7 +63,7 @@ size_t list_index_of(struct list_t *list, const void *item, equality_fn_t *eq)
 	if (list == NULL || item == NULL)
 		return ITEM_NOT_FOUND;
 
-	for (long i = 0; i < list->size; i++) {
+	for (size_t i = 0; i < list->size; i++) {
 		if (eq(*(list->items + i), item))
 			return i;
 	}
@@ -85,14 +84,16 @@ size_t list_index_of_r(struct list_t *list, const void *item, equality_fn_t *eq)
 	return ITEM_NOT_FOUND;
 }
 
-bool list_append(struct list_t *list, const void *item)
+bool list_append(struct list_t *list, void *item)
 {
 	if (list == NULL || item == NULL)
 		return false;
 
-	ENSURE_CAP(list->size, list->capacity, list->items);
+	// ENSURE_CAP(list->size, list->capacity, list->items);
 
 	list->items[list->size++] = item;
+
+	return true;
 }
 
 void *list_get(struct list_t *list, const size_t idx)
@@ -119,7 +120,7 @@ bool list_remove(struct list_t *list, const size_t idx)
 
 	--list->size;
 
-	REDUCE_CAP(list->size, list->capacity, list->items);
+	// REDUCE_CAP(list->size, list->capacity, list->items);
 
 	return idx;
 }
@@ -135,6 +136,8 @@ bool list_remove_item(struct list_t *list, const void *item, equality_fn_t *eq)
 		return false;
 
 	list_remove(list, ret);
+
+	// REDUCE_CAP(list->size, list->capacity, list->items);
 
 	return ret;
 }

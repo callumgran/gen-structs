@@ -18,30 +18,30 @@
 #ifndef GS_FOREACH_H
 #define GS_FOREACH_H
 
-#include "queue.h"
-#include "stack.h"
-#include "list.h"
 #include "d_linkedlist.h"
+#include "list.h"
+#include "queue.h"
 #include "s_linkedlist.h"
+#include "stack.h"
 
 typedef void exec_fn_t(void *item);
 
-void queue_for_each(struct queue_t *queue, exec_fn_t exec);
+void queue_foreach(struct queue_t *queue, exec_fn_t exec);
 
-void stack_for_each(struct stack_t *stack, exec_fn_t exec);
+void stack_foreach(struct stack_t *stack, exec_fn_t exec);
 
-void list_for_each(struct list_t *list, exec_fn_t exec);
+void list_foreach(struct list_t *list, exec_fn_t exec);
 
-void d_ll_for_each(struct d_linkedlist_t *dll, exec_fn_t exec);
+void d_ll_foreach(struct d_linkedlist_t *dll, exec_fn_t exec);
 
-void s_ll_for_each(struct s_linkedlist_t *sll, exec_fn_t exec);
+void s_ll_foreach(struct s_linkedlist_t *sll, exec_fn_t exec);
 
-#define FOR_EACH(struct, exec)               \
-	_Generic((struct), struct queue_t *       \
-			 : queue_for_each, struct stack_t * \
-			 : stack_for_each, struct list_t * \
-                         : list_for_each, struct d_linkedlist_t * \
-                         : d_ll_for_each, struct s_linkedlist_t * \
-                         : s_ll_for_each)(struct, exec)
+#define FOREACH(structure, exec)                     \
+	_Generic((structure), struct queue_t *            \
+			 : queue_foreach, struct stack_t *       \
+			 : stack_foreach, struct list_t *        \
+			 : list_foreach, struct d_linkedlist_t * \
+			 : d_ll_foreach, struct s_linkedlist_t * \
+			 : s_ll_foreach)(structure, exec)
 
 #endif

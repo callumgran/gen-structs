@@ -25,12 +25,12 @@ bool stack_init(struct stack_t *stack, const size_t cap)
 	if (stack == NULL)
 		return false;
 
-	if (capacity == 0)
+	if (cap == 0)
 		return false;
 
 	stack->size = 0;
-	stack->capacity = capacity;
-	stack->items = (void **)(malloc(capacity * sizeof(void *)));
+	stack->capacity = cap;
+	stack->items = (void **)(malloc(cap * sizeof(void *)));
 
 	return true;
 }

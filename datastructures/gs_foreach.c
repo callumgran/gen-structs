@@ -17,49 +17,49 @@
 
 #include <stdlib.h>
 
-#include "ll_iterator.h"
 #include "gs_foreach.h"
+#include "ll_iterator.h"
 
-void queue_for_each(struct queue_t *queue, exec_fn_t exec)
+void queue_foreach(struct queue_t *queue, exec_fn_t exec)
 {
-        for (size_t i = 0; i < queue->size; i++) {
-                exec(queue->items[i]);
-        }
+	for (size_t i = 0; i < queue->size; i++) {
+		exec(queue->items[i]);
+	}
 }
 
-void stack_for_each(struct stack_t *stack, exec_fn_t exec)
+void stack_foreach(struct stack_t *stack, exec_fn_t exec)
 {
-        for (size_t i = 0; i < stack->size; i++) {
-                exec(stack->items[i]);
-        }
+	for (size_t i = 0; i < stack->size; i++) {
+		exec(stack->items[i]);
+	}
 }
 
 
-void list_for_each(struct list_t *list, exec_fn_t exec)
+void list_foreach(struct list_t *list, exec_fn_t exec)
 {
-        for (size_t i = 0; i < list->size; i++) {
-                exec(list->items[i]);
-        }
+	for (size_t i = 0; i < list->size; i++) {
+		exec(list->items[i]);
+	}
 }
 
-void d_ll_for_each(struct d_linkedlist_t *dll, exec_fn_t exec)
+void d_ll_foreach(struct d_linkedlist_t *dll, exec_fn_t exec)
 {
-        struct d_ll_iter_t iter;
-        LL_ITER_START(&iter, dll);
+	struct d_ll_iter_t iter;
+	LL_ITER_START(&iter, dll);
 
-        while (LL_ITER_HAS_NEXT(&iter)) {
-                exec(LL_ITER_GET(&iter));
-                LL_ITER_NEXT(&iter);
-        }
+	while (LL_ITER_HAS_NEXT(&iter)) {
+		exec(LL_ITER_GET(&iter));
+		LL_ITER_NEXT(&iter);
+	}
 }
 
-void s_ll_for_each(struct s_linkedlist_t *sll, exec_fn_t exec)
+void s_ll_foreach(struct s_linkedlist_t *sll, exec_fn_t exec)
 {
-        struct s_ll_iter_t iter;
-        LL_ITER_START(&iter, sll);
+	struct s_ll_iter_t iter;
+	LL_ITER_START(&iter, sll);
 
-        while (LL_ITER_HAS_NEXT(&iter)) {
-                exec(LL_ITER_GET(&iter));
-                LL_ITER_NEXT(&iter);
-        }
+	while (LL_ITER_HAS_NEXT(&iter)) {
+		exec(LL_ITER_GET(&iter));
+		LL_ITER_NEXT(&iter);
+	}
 }
