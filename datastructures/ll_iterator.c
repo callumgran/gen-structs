@@ -15,57 +15,57 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include <stdlib.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 #include "ll_iterator.h"
 
 void d_ll_start(struct d_ll_iter_t *iter, struct d_linkedlist_t *list)
 {
-        iter->curr = list->head;
+	iter->curr = list->head;
 }
 
 void d_ll_start_rev(struct d_ll_iter_t *iter, struct d_linkedlist_t *list)
 {
-        iter->curr = list->tail;
+	iter->curr = list->tail;
 }
 
 void d_ll_next(struct d_ll_iter_t *iter)
 {
-        iter->curr = iter->curr->next;
+	iter->curr = iter->curr->next;
 }
 
 void d_ll_prev(struct d_ll_iter_t *iter)
 {
-        iter->curr = iter->curr->prev;
+	iter->curr = iter->curr->prev;
 }
 
 bool d_ll_has_next(struct d_ll_iter_t *iter)
 {
-        return iter->curr != NULL;
+	return iter->curr != NULL;
 }
 
 void *d_ll_get(struct d_ll_iter_t *iter)
 {
-        return iter->curr->item;
+	return iter->curr->item;
 }
 
 void s_ll_start(struct s_ll_iter_t *iter, struct s_linkedlist_t *list)
 {
-        iter->curr = list->head;
+	iter->curr = list->head;
 }
 
 void s_ll_next(struct s_ll_iter_t *iter)
 {
-        iter->curr = iter->curr->next;
+	iter->curr = iter->curr->next;
 }
 
 bool s_ll_has_next(struct s_ll_iter_t *iter)
 {
-        return iter->curr != NULL;
+	return iter->curr != NULL;
 }
 
 void *s_ll_get(struct s_ll_iter_t *iter)
 {
-        return iter->curr->item;
+	return iter->curr->item;
 }

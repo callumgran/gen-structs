@@ -24,11 +24,11 @@
 #include "s_linkedlist.h"
 
 struct d_ll_iter_t {
-        struct d_linkedlist_node_t *curr;
+	struct d_linkedlist_node_t *curr;
 };
 
 struct s_ll_iter_t {
-        struct s_linkedlist_node_t *curr;
+	struct s_linkedlist_node_t *curr;
 };
 
 void d_ll_start(struct d_ll_iter_t *iter, struct d_linkedlist_t *list);
@@ -51,9 +51,9 @@ bool s_ll_has_next(struct s_ll_iter_t *iter);
 
 void *s_ll_get(struct s_ll_iter_t *iter);
 
-#define LL_ITER_START(iter, list) _Generic((iter), \
-              struct d_ll_iter_t *: d_ll_start, \
-              struct s_ll_iter_t *: s_ll_start \
-              )(iter, list)
+#define LL_ITER_START(iter, list)               \
+	_Generic((iter), struct d_ll_iter_t *       \
+			 : d_ll_start, struct s_ll_iter_t * \
+			 : s_ll_start)(iter, list)
 
 #endif
