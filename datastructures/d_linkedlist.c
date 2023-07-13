@@ -192,13 +192,13 @@ void *d_linkedlist_remove(struct d_linkedlist_t *d_linkedlist, const void *item,
 			if (d_linkedlist->tail == node)
 				d_linkedlist->tail = node->prev;
 
-			void *item = node->item;
+			void *ret = node->item;
 
 			free(node);
 
 			d_linkedlist->size--;
 
-			return item;
+			return ret;
 		}
 
 		node = node->next;

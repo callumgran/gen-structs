@@ -17,9 +17,10 @@ CFLAGS = -Iinclude -Wall -Wextra -Wshadow -std=c11
 
 .PHONY: format clean tags bear $(OBJDIR)
 TARGET_STACK_TEST = stack_test
+TARGET_LL_ITER_TEST = ll_iter_test
 
 clean:
-	rm -rf $(OBJDIR) $(TARGET_STACK_TEST)
+	rm -rf $(OBJDIR) $(TARGET_STACK_TEST) $(TARGET_LL_ITER_TEST)
 
 tags:
 	@ctags -R
@@ -32,6 +33,8 @@ format:
 
 stack_test:
 	$(CC) ./datastructures/stack.c ./tests/stack_test.c $(CFLAGS) -o $(TARGET_STACK_TEST)
+ll_iter_test:
+	$(CC) ./datastructures/d_linkedlist.c ./datastructures/s_linkedlist.c ./datastructures/ll_iterator.c ./tests/iterator_test.c $(CFLAGS) -o $(TARGET_LL_ITER_TEST)
 
 $(OBJDIR):
 	$(foreach dir, $(DIRS), $(shell mkdir -p $(OBJDIR)/$(dir)))
