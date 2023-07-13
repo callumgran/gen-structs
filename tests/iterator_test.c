@@ -55,7 +55,57 @@ void test_iter_start(void)
 	printf("--------------------------------\n");
 }
 
+void test_iter_next(void)
+{
+	int a = 1;
+	int b = 2;
+	int c = 3;
+	struct d_linkedlist_t dll;
+	d_linkedlist_init(&dll);
+	d_linkedlist_push_back(&dll, &a);
+	d_linkedlist_push_back(&dll, &b);
+	d_linkedlist_push_back(&dll, &c);
+
+	struct s_linkedlist_t sll;
+	s_linkedlist_init(&sll);
+	s_linkedlist_push_back(&sll, &a);
+	s_linkedlist_push_back(&sll, &b);
+	s_linkedlist_push_back(&sll, &c);
+
+	struct d_ll_iter_t dll_iter;
+	LL_ITER_START(&dll_iter, &dll);
+
+	int ret = *(int *)d_ll_get(&dll_iter);
+
+	assert(ret == 1);
+
+	LL_ITER_NEXT(&dll_iter);
+
+	ret = *(int *)d_ll_get(&dll_iter);
+
+	assert(ret == 2);
+
+	struct s_ll_iter_t sll_iter;
+	LL_ITER_START(&sll_iter, &sll);
+	ret = *(int *)s_ll_get(&sll_iter);
+
+	assert(ret == 1);
+
+	LL_ITER_NEXT(&sll_iter);
+
+	ret = *(int *)s_ll_get(&sll_iter);
+
+	assert(ret == 2);
+
+
+	printf("--------------------------------\n");
+	printf("Completed iterator next tests\n");
+	printf("--------------------------------\n");
+}
+
+
 int main(void)
 {
 	test_iter_start();
+	test_iter_next();
 }
