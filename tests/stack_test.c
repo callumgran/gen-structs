@@ -55,6 +55,10 @@ void test_push_pop_get(void)
 	assert(pop->b == 1.1);
 
 	stack_free(&stack);
+
+	printf("--------------------------------\n");
+	printf("Completed push pop get stack tests\n");
+	printf("--------------------------------\n");
 }
 
 int main(void)
