@@ -37,7 +37,7 @@ void d_ll_foreach(struct d_linkedlist_t *dll, exec_fn_t exec);
 void s_ll_foreach(struct s_linkedlist_t *sll, exec_fn_t exec);
 
 #define FOREACH(structure, exec)                     \
-	_Generic((structure), struct queue_t *            \
+	_Generic((structure), struct queue_t *           \
 			 : queue_foreach, struct stack_t *       \
 			 : stack_foreach, struct list_t *        \
 			 : list_foreach, struct d_linkedlist_t * \
