@@ -56,4 +56,18 @@ void *s_ll_get(struct s_ll_iter_t *iter);
 			 : d_ll_start, struct s_ll_iter_t * \
 			 : s_ll_start)(iter, list)
 
+#define LL_ITER_NEXT(iter)               \
+	_Generic((iter), struct d_ll_iter_t *       \
+			 : d_ll_next, struct s_ll_iter_t * \
+			 : s_ll_next)(iter)
+
+#define LL_ITER_HAS_NEXT(iter)               \
+	_Generic((iter), struct d_ll_iter_t *       \
+			 : d_ll_has_next, struct s_ll_iter_t * \
+			 : s_ll_has_next)(iter)
+
+#define LL_ITER_GET(iter)               \
+	_Generic((iter), struct d_ll_iter_t *       \
+			 : d_ll_get, struct s_ll_iter_t * \
+			 : s_ll_get)(iter)
 #endif
