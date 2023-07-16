@@ -12,3 +12,6 @@ Generic abstract datastructures in C with extended functionality
 - [ ] binary heap
 - [ ] fixed size hashtable
 - [ ] dynamic hashmap
+
+### Features
+- [x] Generic foreach for all datastructures
