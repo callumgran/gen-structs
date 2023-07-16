@@ -37,5 +37,6 @@ bool queue_full(const struct queue_t *queue);
 
 bool queue_push(struct queue_t *queue, void *item);
 void *queue_pop(struct queue_t *queue);
+void *queue_get(const struct queue_t *queue);
 
 #endif

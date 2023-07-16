@@ -88,3 +88,14 @@ void *queue_pop(struct queue_t *queue)
 	queue->size--;
 	return element;
 }
+
+void *queue_get(const struct queue_t *queue)
+{
+	if (queue == NULL)
+		return NULL;
+
+	if (queue_empty(queue))
+		return NULL;
+
+	return queue->items[queue->start];
+}

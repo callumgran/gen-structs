@@ -40,20 +40,20 @@ void test_push_pop_get(void)
 	assert(rc);
 
 	struct tuple_t *get = queue_get(&queue);
-	assert(get->a == 2);
-	assert(get->b == 2.2);
-
-	struct tuple_t *pop = queue_pop(&queue);
-	assert(pop->a == 2);
-	assert(pop->b == 2.2);
-
-	get = queue_get(&queue);
 	assert(get->a == 1);
 	assert(get->b == 1.1);
 
-	pop = queue_pop(&queue);
+	struct tuple_t *pop = queue_pop(&queue);
 	assert(pop->a == 1);
 	assert(pop->b == 1.1);
+
+	get = queue_get(&queue);
+	assert(get->a == 2);
+	assert(get->b == 2.2);
+
+	pop = queue_pop(&queue);
+	assert(pop->a == 2);
+	assert(pop->b == 2.2);
 
 	queue_free(&queue);
 

@@ -64,3 +64,5 @@ hashmap_test
 heapq_test
 stack_test
 ll_iter_test
+queue_test
+foreach_test

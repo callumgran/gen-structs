@@ -19,9 +19,10 @@ CFLAGS = -Iinclude -Wall -Wextra -Wshadow -std=c11 -g
 TARGET_STACK_TEST = stack_test
 TARGET_LL_ITER_TEST = ll_iter_test
 TARGET_FOREACH_TEST = foreach_test
+TARGET_QUEUE_TEST = queue_test
 
 clean:
-	rm -rf $(OBJDIR) $(TARGET_STACK_TEST) $(TARGET_LL_ITER_TEST) $(TARGET_FOREACH_TEST)
+	rm -rf $(OBJDIR) $(TARGET_STACK_TEST) $(TARGET_LL_ITER_TEST) $(TARGET_FOREACH_TEST) $(TARGET_QUEUE_TEST)
 
 tags:
 	@ctags -R
@@ -34,6 +35,8 @@ format:
 
 stack_test:
 	$(CC) ./datastructures/stack.c ./tests/stack_test.c $(CFLAGS) -o $(TARGET_STACK_TEST)
+queue_test:
+	$(CC) ./datastructures/queue.c ./tests/queue_test.c $(CFLAGS) -o $(TARGET_QUEUE_TEST)
 ll_iter_test:
 	$(CC) ./datastructures/d_linkedlist.c ./datastructures/s_linkedlist.c ./datastructures/ll_iterator.c ./tests/iterator_test.c $(CFLAGS) -o $(TARGET_LL_ITER_TEST)
 foreach_test:
